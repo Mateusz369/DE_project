@@ -1,0 +1,15 @@
+name: "taxi_pyspark"
+
+services:                  
+  jupyterlab:               
+    image: jupyter/pyspark-notebook:x86_64-spark-3.5.0 
+
+    ports:                   
+      - 8888:8888            # JupyterLab
+      - 4040:4040            # Spark UI
+    volumes:                
+      - ./notebook:/home/jovyan/work  
+    
+    environment:        
+      - JUPYTER_ENABLE_LAB=yes     
+      - JUPYTER_TOKEN=taxi_2025
