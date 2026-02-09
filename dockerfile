@@ -1,20 +1,13 @@
-FROM ubuntu:22.04
+FROM jupyter/pyspark-notebook:x86_64-spark-3.5.0
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        curl \
-        tar \
-        openjdk-17-jdk \
-    && rm -rf /var/lib/apt/lists/*
+USER root
 
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-ENV PATH="$JAVA_HOME/bin:$PATH"
+# Dodajemy tylko Delta Lake JAR-y do Sparka
+RUN curl -L https://repo1.maven.org/maven2/io/delta/delta-spark_2.12/3.2.0/delta-spark_2.12-3.2.0.jar -o ${SPARK_HOME}/jars/delta-spark_2.12-3.2.0.jar && \
+    curl -L https://repo1.maven.org/maven2/io/delta/delta-storage/3.2.0/delta-storage-3.2.0.jar -o ${SPARK_HOME}/jars/delta-storage-3.2.0.jar
 
-RUN curl https://dlcdn.apache.org/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz --output hadoop-3.3.6.tar.gz && \
-    tar -xvf hadoop-3.3.6.tar.gz && \
-    rm hadoop-3.3.6.tar.gz
+# Włączamy rozszerzenia Delta Lake
+RUN echo "spark.sql.extensions io.delta.sql.DeltaSparkSessionExtension" >> ${SPARK_HOME}/conf/spark-defaults.conf && \
+    echo "spark.sql.catalog.spark_catalog org.apache.spark.sql.delta.catalog.DeltaCatalog" >> ${SPARK_HOME}/conf/spark-defaults.conf
 
-ENV HADOOP_HOME=/hadoop-3.3.6
-ENV PATH="$HADOOP_HOME/bin:$PATH"
-
-CMD ["bash"]
+USER ${NB_UID}
