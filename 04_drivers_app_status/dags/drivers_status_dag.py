@@ -61,7 +61,7 @@ def upload_to_volume(**context):
     local_file = f"/airflow/{file_name}"
     volume_file = f"/Volumes/driver_app_status/raw_data/raw_data/{file_name}"
 
-    conn = BaseHook.get_connection('databricks_default')
+    conn = BaseHook.get_connection('databricks_ingestion')
     host = conn.host.rstrip('/')
     token = conn.password or conn.extra_dejson.get('token')
     w = WorkspaceClient(host=host, token=token)
@@ -100,7 +100,6 @@ with DAG(
     download = PythonOperator(
         task_id="download",
         python_callable=get_data,
-        #op_args=["/airflow/tlc_driver_application_{{ds}}.csv"],
         op_kwargs={"file_name": "/airflow/tlc_driver_application_{{ds}}.csv"},
        
     )
