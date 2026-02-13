@@ -1,19 +1,27 @@
 # NYC Traffic/ Data Engineering Project
 
-This repo is build based on different kind of data from [NYC_OpenData] public data source.
-
 WIĘCEJ O SAMYM PROJEKCIE, jakie i ile danych użyto
+
+It is recommended to view this project on this website (as HTML code) for better readability, however Github repository with full code is available here - LINK.
+
+This repoistory is build based on different kind of data from [NYC_OpenData](https://data.cityofnewyork.us/browse?sortBy=most_accessed&utf8=%E2%9C%93) public data source.
+
+Each project can be presented in a production environment depending on technologies used - details below.
 
 ## Type of Data & Main Technologies used
 
-Data in the project consist of different kind of traffic datasets from [NYC_OpenData] source. Each part shows different techologies, analyzes, scripts and modelling technigues used for data engineering purpose.
+Data in the project consist of 4 different traffic datasets from NYC OpenData source. Each part shows different techologies, analysis, scripts and modelling techniques used for data engineering purpose.
 
 Main tech stack:
-1. NYC Taxi Trip Records - PySpark (formatting, analytics, JOINs, shuffle handle, window), pandas, One Big Table
-2. TLC Employee Payroll - requests, postgres - Cumulative Table Design/Incremental Load
-3. NYC Parking Violations - PySpark, postgres - Fact Data Modeling (Reduced Facts)
-4. TLC Drivers Applications Status - Airflow, Databricks, SCD Type 2
 
+| Project | ![](images/python.svg) | Spark | Airflow | Databricks | Data modeling |
+|----------|------|-----------|-|-|-|
+| 01. NYC Taxi Trip Records     | - | formatting, analytics, shuffle handling, JOINs, functions etc. | - | - | One Big Table | 
+| 02. TLC Employee Payroll   | requests, sqlalchemy | - | -  | - | Cumulative Table Design / Incremental Load | 
+| 03. NYC Parking Violations    | - | formatting | - | - | Fact Data Modeling (Reduced Facts) | 
+| 04. TLC Drivers Applications Status    | requests, pendulum | - | DAG, BranchOperator, Databricks connection, CRON | delta/streaming tables, medallion architecture, pipelines, jobs | Slowly Changing Dimension Type 2 | 
+
+## Project details
 
 ### 1. NYC Taxi Trip Records Dataset 
 - daily records of different kind of taxi trips: for_hire_vehicle (FHV), high_volume_for_hire (HV), yellow_taxi and green_taxi.
@@ -44,7 +52,7 @@ Examples of different sorting plan and shuffle handling:
  This part shows how to reduce the amount of data by combining non-changeble rows into one, keeping all changable 'stats' together in an array (and unnest them again at the end if needed). 
  Small part of NYC Payroll data is retrieved and limited to TLC employees to avoid discrepancies (no unique EmployeeID available for public - Primary Key being First and Lastname only).
 
-|:--------------|:------------:|
+|------a--------|------b------:|
 | Source        | [Data link](data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/about_data) | 
 | No. of rows   | 7k for TLC department |
 | Frequency     | Annually, per FY |
