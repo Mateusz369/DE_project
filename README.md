@@ -2,15 +2,13 @@
 
 Created as a Data Engineering portfolio project.
 Designed and implemented scalable, high-throughput data pipelines for processing and analyzing large-scale New York City traffic datasets.
-Leveraged Python, SQL, PySpark, Apache Airflow, and Databricks to enable reliable ingestion, robust transformations, and optimized querying for analytics and data modeling.
+Leveraged Python, SQL, PySpark, Apache Airflow, and Databricks to enable reliable ingestion, efficient transformations, and optimized querying for analytics and data modeling.
 
 ## About the project
 
-It is recommended to view this project on this website (as embedded HTML code) for better readability, however Github repository with full code is available here - LINK.
-
 This repoistory is build based on different kind of real data from [NYC_OpenData](https://data.cityofnewyork.us/browse?sortBy=most_accessed&utf8=%E2%9C%93) public data source.
 
-Each project can be presented and run in a production environment depending on technologies used - details below.
+Each part can be presented and run in a production environment depending on technologies used - details below.
 
 ## Type of Data & Main Technologies used
 
@@ -28,7 +26,7 @@ Main tech stack:
 ## Projects summary
 
 ### 1. NYC Taxi Trip Records Dataset 
-- daily records of different kind of taxi trips: for_hire_vehicle (FHV), high_volume_for_hire (HV), yellow_taxi and green_taxi.
+- daily records of different kind of taxi trips: for_hire_vehicle (FHV), high_volume_vehicle (HV), yellow_taxi and green_taxi.
 
 This is an extension of the official TLC (TAXI & LIMOUSINE COMMISSION) records generated and published in a form of Power BI charts & tables available under [link](https://www.nyc.gov/site/tlc/about/data-and-research.page). It includes additional analysis for each type of taxi in NYC using PySpark.
 
@@ -48,7 +46,7 @@ The goal is to show how to handle data at scale with extended taxi trip analysis
 
 | | |
 |--------------|----------|
-| Source        | [Data link](data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/about_data) | 
+| Source        | [Data link](https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/about_data) | 
 | No. of rows   | 7k for TLC department |
 | Frequency     | Annually, per FY |
 
@@ -65,7 +63,7 @@ The goal is to show how to handle data at scale with extended taxi trip analysis
 | Frequency     | monthly (only July 2024 in this example) |
 
 
-### 4. TLC New Driver Application Status
+### 4. TLC New Drivers Application Status
 - daily status of TLC new driver's application
 
 This project indicates how to model slowly changing dimensions with upserting method in Databricks. For the purpose of this project, data is derived from API and uploaded to Databricks. Then, data goes through different layers of medallion architecture based on streaming tables and is finally saved as a view in a form of SCD type 2. Everything is executed automatically everyday based on Airflow DAG and Databricks pipeline/job.
@@ -75,5 +73,6 @@ This project indicates how to model slowly changing dimensions with upserting me
 | Source        | [Data link](https://data.cityofnewyork.us/Transportation/TLC-New-Driver-Application-Status/dpec-ucu7/about_data) |
 | No. of rows   | 5k per day |
 | Frequency     | daily, orchestrated API call |
+
 
 
