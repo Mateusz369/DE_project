@@ -20,7 +20,7 @@ Main tech stack:
 
 | Project | ![](images/python.svg) Python | ![](images/spark.webp) Spark | ![](images/airflow.webp) Airflow | ![](images/databricks.webp) Databricks | ![](images/sql.svg) Data modeling |
 |----------|------|-----------|-|-|-|
-| 01. NYC Taxi Trip Records     | - | formatting, analytics, shuffle handling, JOINs, sorting, window functions etc. | - | - | One Big Table | 
+| 01. NYC Taxi Trip Records     | - | formatting, analytics, shuffle handling, JOINs, sorting, window functions etc. | - | - | - | 
 | 02. TLC Employee Payroll   | requests, sqlalchemy | - | -  | - | Cumulative Table Design / Incremental Load | 
 | 03. NYC Parking Violations    | - | formatting | - | - | Fact Data Modeling (Reduced facts) | 
 | 04. TLC Drivers Applications Status    | requests, pendulum | - | DAG, BranchOperator, Databricks connection, CRON | delta/streaming tables, medallion architecture, pipelines, jobs | Slowly Changing Dimension Type 2 | 
