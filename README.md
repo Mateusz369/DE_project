@@ -1,3 +1,5 @@
+## See the project in a more readable format [LINK](https://datawithmateusz.it/)
+
 # NYC Traffic/ Data Engineering Project
 
 Created as a Data Engineering portfolio project.
